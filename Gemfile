@@ -28,6 +28,11 @@ gem 'devise'
 gem 'cancan' # or cancancan
 gem 'draper'
 gem 'pundit'
+# API stuff
+gem 'active_model_serializers'
+gem 'grape'
+gem 'grape-active_model_serializers'
+gem 'grape-rails-cache'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
