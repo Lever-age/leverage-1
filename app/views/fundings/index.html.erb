@@ -1,0 +1,34 @@
+<h1>Candidate Funding</h1>
+<section>
+  <h2>Candidate Charts</h2>
+  <form name="candidate_form" id="candidate_form">
+    <label for="candidate">Choose Candidate</label>
+    <select name="candidate" id="candidate">
+    </select>
+    <h3 class="current-candidate"></h3>
+    <div class="chart-group">
+      <div class="chart" id="candidate-donut-chart">
+        <svg></svg>
+      </div>
+      <div class="chart" id="candidate-bar-chart">
+        <svg></svg>
+      </div>
+    </div>
+  </form>
+</section>
+<section>
+  <h2>Position Charts</h2>
+  <form name="position_form" id="position_form">
+    <label for="position">Position</label>
+    <select name="position" id="position">
+    </select>
+    <div class="chart" id="position-bar-chart">
+      <svg></svg>
+  </form>
+</section>
+
+
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<%= javascript_include_tag 'nv.d3.min', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'funding', 'data-turbolinks-track' => true %>
+
