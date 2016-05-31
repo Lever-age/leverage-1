@@ -1,31 +1,55 @@
-<h1>Candidate Funding</h1>
-<section>
-  <h2>Candidate Charts</h2>
-  <form name="candidate_form" id="candidate_form">
-    <label for="candidate">Choose Candidate</label>
-    <select name="candidate" id="candidate">
-    </select>
-    <h3 class="current-candidate"></h3>
-    <div class="chart-group">
-      <div class="chart" id="candidate-donut-chart">
-        <svg></svg>
+<div class="container">
+  <h1>Candidate Funding</h1>
+  <section>
+    <h2>Candidate Charts</h2>
+    <form name="candidate_form" id="candidate_form">
+      <label for="candidate">Choose Candidate</label>
+      <select name="candidate" id="candidate">
+      </select>
+      <h3 class="section-title">Candidate name: <span class="current-candidate"></span></h3>
+      <div class="chart-group">
+        <div class="chart" id="candidate-donut-chart">
+          <svg></svg>
+        </div>
+        <div class="chart" id="candidate-bar-chart">
+          <svg></svg>
+        </div>
       </div>
-      <div class="chart" id="candidate-bar-chart">
-        <svg></svg>
+    </form>
+  </section>
+  <section>
+    <h2>Position Charts</h2>
+    <form name="position_form" id="position_form">
+      <label for="position">Choose Position</label>
+      <select name="position" id="position">
+      </select>
+      <h3 class="section-title">Position: <span class="current-position"></span></h3>
+      <div class="chart-group">
+        <div class="chart chart_full" id="candidate-donut-type-chart">
+          <h4 class="chart-title">Ideological vs Transactional</h4>
+          <svg></svg>
+        </div>
+        <div class="chart chart_full" id="candidate-donut-total-chart">
+          <h4 class="chart-title">Total Candidates Funding</h4>
+          <svg></svg>
+        </div>
+        <div class="chart chart_full" id="candidate-donut-ideological-chart">
+          <h4 class="chart-title">Ideological Candidates Funding</h4>
+          <svg></svg>
+        </div>
+        <div class="chart chart_full" id="candidate-donut-transactional-chart">
+          <h4 class="chart-title">Transactional Candidates Funding</h4>
+          <svg></svg>
+        </div>
       </div>
-    </div>
-  </form>
-</section>
-<section>
-  <h2>Position Charts</h2>
-  <form name="position_form" id="position_form">
-    <label for="position">Position</label>
-    <select name="position" id="position">
-    </select>
-    <div class="chart" id="position-bar-chart">
-      <svg></svg>
-  </form>
-</section>
+    </form>
+  </section>
+  <section>
+    <h2>Development info:</h2>
+    <h3><a href="/funding">API data</a></h3>
+    <h3><a href="/admin/fundings">Edit funding data</a> (ask Tina for credentials)</h3>
+  </section>
+</div>
 
 
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>

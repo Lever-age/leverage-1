@@ -50,6 +50,7 @@ $(function(){
           .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
           .tooltips(false)        //Don't show tooltips
           .showValues(true)       //...instead, show the bar value right on top of each bar.
+
           ;
 
       d3.select(id + " svg")
@@ -87,6 +88,70 @@ $(function(){
     }
     return chartData;
   }
+
+  function getPositionChartsData(collection, position) {
+    var i,
+      chartData = {
+        type: [],
+        total: [],
+        ideological: [],
+        transactional: []
+      },
+      totalIdeol = 0,
+      totalTrans = 0,
+      total = {},
+      totalNames;
+
+    for (i = 0; i < collection.length; ++i) {
+
+      // Getting ideological vs transactional data
+      if (collection[i].position === position) {
+        if (collection[i].donorType === 'ideological') {
+          totalIdeol += parseFloat(collection[i].amount);
+          chartData.ideological.push({
+            label: collection[i].candidate,
+            value: collection[i].amount
+          });
+        } else if (collection[i].donorType === 'transactional') {
+          totalTrans += parseFloat(collection[i].amount);
+          chartData.transactional.push({
+            label: collection[i].candidate,
+            value: collection[i].amount
+          });
+        }
+        if (total.hasOwnProperty(collection[i].candidate) ) {
+          total[collection[i].candidate] += parseFloat(collection[i].amount);
+        } else {
+          total[collection[i].candidate] = parseFloat(collection[i].amount);
+        }
+      }
+
+    }
+
+    totalNames = Object.keys(total);
+    for (i = 0; i < totalNames.length; i++) {
+      chartData.total.push({
+        label: totalNames[i],
+        value: total[totalNames[i]]
+      });
+    }
+
+    chartData.type = [
+      {
+        label: 'Ideological',
+        value: totalIdeol
+      },
+      {
+        label: 'transactional',
+        value: totalTrans
+      }
+    ];
+
+    console.log(chartData);
+
+    return chartData;
+  }
+
   function getCandBarData(collection, name) {
     var i,
       chartDataValues = [];
@@ -105,7 +170,19 @@ $(function(){
             }];
   }
 
+  function drawPositionCharts(data, position) {
+    var positionChartsData = getPositionChartsData(data, position);
+
+    $('.current-position').text(position);
+
+    columnFetchDonut('#candidate-donut-type-chart', positionChartsData.type);
+    columnFetchDonut('#candidate-donut-total-chart', positionChartsData.total);
+    columnFetchDonut('#candidate-donut-ideological-chart', positionChartsData.ideological);
+    columnFetchDonut('#candidate-donut-transactional-chart', positionChartsData.transactional);
+  }
+
   $.get( "/funding", function(data) {
+    console.log(data);
     var candidates = getPropsInCollection(data, 'candidate');
     var positions = getPropsInCollection(data, 'position');
 
@@ -114,29 +191,24 @@ $(function(){
 
     columnFetchDonut('#candidate-donut-chart', getCandDonutData(data, candidates[0]));
     columnFetchBar('#candidate-bar-chart', getCandBarData(data, candidates[0]));
+    $('.current-candidate').text(candidates[0]);
 
-    columnFetchBar('#position-bar-chart', [ 
-      {
-        key: "Cumulative Return",
-        values: [
-          { 
-            "label" : "H Label" , 
-            "value" : 45
-          },
-          { 
-            "label" : "B Label" , 
-            "value" : 243
-          }
-        ]
-      }
-    ]);
+    drawPositionCharts(data, positions[0]);
+
     $('#candidate').on('change', function(){
       var name = $(this).val(),
         donutChartData = getCandDonutData(data, name),
         barChartData = getCandBarData(data, name);
 
+      $('.current-candidate').text(name);
+
       columnFetchDonut('#candidate-donut-chart', donutChartData);
       columnFetchBar('#candidate-bar-chart', barChartData);
+    });
+    $('#position').on('change', function(){
+      var position = $(this).val();
+
+      drawPositionCharts(data, position);
     });
 
   });
