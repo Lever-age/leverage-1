@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+ .content-img {
+  max-width: 100%;
+  width: 400px;
+  margin: 30px auto 30px;
+  img {
+    max-width: 100%;
+  }
+ }

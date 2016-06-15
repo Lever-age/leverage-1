@@ -34,6 +34,9 @@ gem 'grape'
 gem 'grape-active_model_serializers'
 gem 'grape-rails-cache'
 
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
