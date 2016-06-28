@@ -1,5 +1,5 @@
 class FundingSerializer < ActiveModel::Serializer
-  attributes :candidate, :donorType, :amount, :position
+  attributes :candidate, :donor, :amount, :position
 end
 
 module Api

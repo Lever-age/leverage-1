@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160526230754) do
 
   create_table "fundings", force: :cascade do |t|
     t.string   "candidate"
-    t.string   "donorType"
+    t.string   "donor"
     t.decimal  "amount"
     t.string   "position"
     t.datetime "created_at", null: false

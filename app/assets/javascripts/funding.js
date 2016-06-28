@@ -81,7 +81,7 @@ $(function(){
     for (i = 0; i < collection.length; ++i) {
       if (collection[i].candidate === name) {
         chartData.push({
-          label: collection[i].donorType,
+          label: collection[i].donor,
           value: collection[i].amount
         });
       }
@@ -106,13 +106,13 @@ $(function(){
 
       // Getting ideological vs transactional data
       if (collection[i].position === position) {
-        if (collection[i].donorType === 'ideological') {
+        if (collection[i].donor === 'ideological') {
           totalIdeol += parseFloat(collection[i].amount);
           chartData.ideological.push({
             label: collection[i].candidate,
             value: collection[i].amount
           });
-        } else if (collection[i].donorType === 'transactional') {
+        } else if (collection[i].donor === 'transactional') {
           totalTrans += parseFloat(collection[i].amount);
           chartData.transactional.push({
             label: collection[i].candidate,
@@ -159,7 +159,7 @@ $(function(){
     for (i = 0; i < collection.length; ++i) {
       if (collection[i].candidate === name) {
         chartDataValues.push({
-          label: collection[i].donorType,
+          label: collection[i].donor,
           value: collection[i].amount
         });
       }

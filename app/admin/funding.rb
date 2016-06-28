@@ -1,5 +1,5 @@
 ActiveAdmin.register Funding do
-  permit_params :candidate, :donorType, :amount, :position
+  permit_params :candidate, :donor, :amount, :position
 
 
 end
