@@ -50,7 +50,7 @@ $(function(){
           .y(function(d) { return d.value })
           .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
           .showValues(true)       //...instead, show the bar value right on top of each bar.
-
+          .showYAxis(false)
           ;
 
       d3.select(id + " svg")
@@ -160,7 +160,7 @@ $(function(){
       if (collection[i].candidate === name) {
         chartDataValues.push({
           label: collection[i].donor,
-          value: collection[i].amount
+          value: +collection[i].amount
         });
       }
     }
