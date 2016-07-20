@@ -186,8 +186,8 @@ $(function(){
     var candidates = getPropsInCollection(data, 'candidate');
     var positions = getPropsInCollection(data, 'position');
 
-    addOptions($('#candidate'), candidates);
-    addOptions($('#position'), positions);
+    addOptions($('#candidate'), candidates.sort());
+    addOptions($('#position'), positions.sort());
 
     columnFetchDonut('#candidate-donut-chart', getCandDonutData(data, candidates[0]));
     columnFetchBar('#candidate-bar-chart', getCandBarData(data, candidates[0]));
