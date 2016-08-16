@@ -50,7 +50,7 @@ $(function(){
           .y(function(d) { return d.value })
           .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
           .showValues(true)       //...instead, show the bar value right on top of each bar.
-
+          .showYAxis(false)
           ;
 
       d3.select(id + " svg")
@@ -81,7 +81,7 @@ $(function(){
     for (i = 0; i < collection.length; ++i) {
       if (collection[i].candidate === name) {
         chartData.push({
-          label: collection[i].donorType,
+          label: collection[i].donor,
           value: collection[i].amount
         });
       }
@@ -106,13 +106,13 @@ $(function(){
 
       // Getting ideological vs transactional data
       if (collection[i].position === position) {
-        if (collection[i].donorType === 'ideological') {
+        if (collection[i].donor === 'ideological') {
           totalIdeol += parseFloat(collection[i].amount);
           chartData.ideological.push({
             label: collection[i].candidate,
             value: collection[i].amount
           });
-        } else if (collection[i].donorType === 'transactional') {
+        } else if (collection[i].donor === 'transactional') {
           totalTrans += parseFloat(collection[i].amount);
           chartData.transactional.push({
             label: collection[i].candidate,
@@ -159,8 +159,8 @@ $(function(){
     for (i = 0; i < collection.length; ++i) {
       if (collection[i].candidate === name) {
         chartDataValues.push({
-          label: collection[i].donorType,
-          value: collection[i].amount
+          label: collection[i].donor,
+          value: +collection[i].amount
         });
       }
     }
@@ -186,8 +186,8 @@ $(function(){
     var candidates = getPropsInCollection(data, 'candidate');
     var positions = getPropsInCollection(data, 'position');
 
-    addOptions($('#candidate'), candidates);
-    addOptions($('#position'), positions);
+    addOptions($('#candidate'), candidates.sort());
+    addOptions($('#position'), positions.sort());
 
     columnFetchDonut('#candidate-donut-chart', getCandDonutData(data, candidates[0]));
     columnFetchBar('#candidate-bar-chart', getCandBarData(data, candidates[0]));
